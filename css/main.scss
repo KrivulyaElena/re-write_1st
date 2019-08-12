@@ -1,0 +1,1003 @@
+* {
+  box-sizing: border-box;
+}
+
+// variables
+$mainColor: #202020;
+$mainBackground: #9e9e9e;
+
+$container: 1200px;
+$colGups: 15px;
+
+$textFont-size: 1rem; // 16px
+$linkColor: blue;
+
+$breakpoints: (
+  xs: 0,
+  sm: 575px,
+  md: 768px,
+  lg: 1025px,
+  xl: 1200px,
+  xxl: 1440px
+);
+
+//===========  mixins start ===========//
+
+// columns
+$columns: 12;
+$col: $columns;
+
+@mixin col($col, $columns) {
+  width: percentage($col/$columns);
+  padding: 0 $colGups;
+}
+
+//===========  mixins end ===========//
+
+@mixin col-create() {
+  @while $col > 0 {
+    .col-#{$col} {
+      @include col($col, $columns);
+    }
+
+    $col: $col - 1;
+  }
+}
+
+// layout
+
+.container {
+  max-width: $container;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.ba-section {
+  padding: 50px 0;
+}
+
+.ba-section__title {
+  text-align: center;
+  font-family: "Dosis", sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 9px;
+  padding: 25px 0 50px 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -$colGups;
+  margin-left: -$colGups;
+}
+
+.row + .row {
+  padding-top: 15px;
+}
+
+[class^="col"] {
+  padding-left: $colGups;
+  padding-right: $colGups;
+  width: 100%;
+  min-height: 1px;
+}
+
+@include col-create();
+@import "slick.scss";
+@import "slick-theme.scss";
+
+//buttons
+a,
+button {
+  transition: 0.3s ease-in;
+  transition-property: color, background-color, opacity;
+  svg {
+    fill: currentColor;
+  }
+}
+
+button,
+.button {
+  cursor: pointer;
+}
+
+.ba-btn {
+  background-color: #fff;
+  border: 2px solid $mainColor;
+  color: black;
+  font-size: 14px;
+  font-family: "Open Sans";
+  text-transform: uppercase;
+  padding: 10px 40px;
+  text-align: center;
+
+  &:hover {
+    background-color: #a55050;
+    color: #fff;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  }
+}
+
+body {
+  font-family: "Dosis", sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-family: "et-line";
+  font-size: 1rem;
+  color: $mainColor;
+}
+
+// HEADER                                                                 HEADER
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  height: 50px;
+  align-items: center;
+}
+
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background-color: $mainBackground;
+
+  &__logo__img {
+    width: 100%;
+    height: auto;
+  }
+
+  &__logo {
+    width: 118px;
+    background-color: transparent;
+  }
+}
+
+.menu {
+  display: flex;
+  letter-spacing: 2px;
+  flex-wrap: wrap;
+
+  &__link {
+    text-decoration: none;
+    color: white;
+    padding-left: 0;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-family: "Open Sans";
+    position: relative;
+
+    &:hover {
+      color: $mainColor;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      transform: translateX(-100%);
+      width: 100%;
+      height: 1px;
+      display: inline-block;
+      background-color: $mainColor;
+      transition: height 0.5s, transform 1.5s;
+      transition-timing-function: cubic-bezier(0.42, 0, 0, 1.12), cubic-bezier(0.42, 0, 0, 1.12);
+    }
+
+    &:hover:after,
+    &:focus:after {
+      transform: translateX(0);
+      height: 2px;
+    }
+  }
+
+  &__item {
+    overflow: hidden;
+    padding-bottom: 5px;
+    font-size: 1rem;
+  }
+
+  &__item + &__item {
+    margin-left: 50px;
+  }
+}
+
+.toggle-menu {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .menu {
+    display: flex;
+    flex-direction: column;
+
+    &__item + &__item {
+      margin: 0;
+    }
+
+    &__link {
+      text-align: center;
+      letter-spacing: 300;
+      text-transform: uppercase;
+      color: #fff;
+      transition: color 0.3s;
+      display: block;
+      font-size: 16px;
+      padding: 15px 0;
+    }
+  }
+
+  .main-nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    top: 100%;
+    background-color: grey;
+    padding: 25px 0;
+    display: none;
+
+    &.open {
+      display: block;
+      text-align: center;
+    }
+  }
+
+  .toggle-menu {
+    display: block;
+    width: 30px;
+
+    &:before,
+    &:after {
+      display: block;
+      content: "";
+      height: 2px;
+      background-color: white;
+    }
+
+    & span {
+      display: block;
+      content: "";
+      height: 2px;
+      background-color: white;
+      margin: 6px 0;
+    }
+  }
+}
+
+// HERO                                                                   HERO
+
+.hero {
+  background: url("../images/header.jpg") no-repeat center;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__title {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 100px;
+    font-size: 30px;
+    font-family: "Dosis";
+    letter-spacing: 50px;
+    font-weight: lighter;
+  }
+
+  &__subtitle {
+    padding: 0;
+    margin: 0;
+    font-size: 19px;
+    font-family: "Open Sans";
+    font-weight: lighter;
+    margin-bottom: 50px;
+  }
+}
+
+.arrow-down-link {
+  transition: transform 0.3s;
+  border: solid #545454 1px;
+  background-color: #545454;
+  width: 20px;
+  height: 20px;
+  margin: 15px;
+  position: relative;
+  transform: rotate(45deg);
+  transform-origin: -45%;
+  font-size: 15px;
+
+  &__icon {
+    display: inline-block;
+    text-align: center;
+    margin: 0;
+    transform: rotate(-45deg);
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 3px;
+    left: 1px;
+    bottom: 0;
+    right: 0;
+  }
+
+  &:hover {
+    transform: translateY(50%) rotate(45deg);
+    color: $mainColor;
+    background-color: #fff;
+  }
+}
+
+//  ABOUT                                                               ABOUT
+
+.about {
+  border-bottom: 1px solid $mainColor;
+
+  &__title {
+    text-align: left;
+  }
+
+  &__txt {
+    font-weight: lighter;
+    font-size: 15px;
+    font-family: "Open Sans";
+    line-height: 2;
+  }
+
+  &__cite {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 3;
+  }
+
+  &__authors {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Dosis";
+    letter-spacing: 5px;
+
+    &__img {
+      width: 100%;
+    }
+
+    &__link {
+      display: block;
+      font-size: 15px;
+
+      &:hover {
+        text-shadow: 0 0 10px #ff0000, 0 0 50px #ff0000;
+      }
+    }
+
+    &__position {
+      font-size: 12px;
+    }
+  }
+}
+
+// hover card
+.about__authors__image {
+  position: relative;
+  overflow: hidden;
+  -webkit-filter: grayscale(100%);
+
+  &:hover {
+    -webkit-filter: none;
+    transition: 0.3s;
+  }
+}
+
+.item-card__main:hover .item-card__main__hover {
+  transform: translateY(0%);
+}
+
+.item-card__main__hover {
+  position: absolute;
+  top: 0;
+  left: -15px;
+  right: -15px;
+  height: calc(100% - 5px);
+  display: block;
+  background: rgba(3, 3, 3, 0.452);
+  transform: translateX(-100%);
+  transition: transform 0.9s ease-in-out;
+}
+
+.author-profile {  
+  font-size: 12px;
+  line-height: 12px;
+  border: 1px solid #eee;
+  padding: 50px 10px;
+  color: #fff;  
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%);
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__tilte {
+    text-transform: uppercase;
+  }
+  &__msg {
+    padding: 15px 0;
+    font-family: 'Open Sans';
+    font-size: 10px;
+    text-transform: lowercase;
+   
+  }
+  &__social {
+    display: flex;
+    padding: 15px 0;
+  }
+
+  &__social-item + &__social-item{
+    margin-left: 10px;
+  }
+  &__social-item__link {
+    :hover {
+      color: #b64343;
+    }
+  }
+  &__social-item__icon {
+  }
+}
+
+// SERVICES                                                         SERVICES
+.services {
+  &__icons {
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: "Dosis";
+    letter-spacing: 3px;
+  }
+
+  &__icon-img {
+    font-family: "et-line";
+    text-align: center;
+    display: block;
+    font-size: 48px;
+    margin-bottom: 35px;
+  }
+
+  &__icon-txt {
+    display: block;
+    text-align: center;
+  }
+}
+
+//LOOKING FOR                                                       LOOKING FOR
+
+.looking-for {
+  background-color: #000;
+  color: #fff;
+  padding: 50px 100px 100px 100px;
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    font-family: "Dosis";
+    font-weight: lighter;
+    font-size: 18px;
+  }
+
+  &__txt {
+    font-size: 15px;
+    font-family: "Open Sans";
+    font-weight: lighter;
+    display: inline-block;
+    margin: 15px 0;
+    width: 75%;
+  }
+
+  &__btn {
+    margin-top: 50px;
+  }
+
+  &__image {
+    position: relative;
+  }
+
+  &__iMac {
+    position: absolute;
+    top: -60px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 60%;
+    max-height: none;
+  }
+}
+
+// PORTFOLIO                                                        PORTFOLIO
+
+.row-tab {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.portfolio {
+  &__text {
+    font-weight: lighter;
+    font-size: 15px;
+    font-family: "Open Sans";
+    line-height: 2;
+    margin: 0 auto;
+    max-width: 50%;
+  }
+  &__tabs {
+    -webkit-filter: grayscale(100%);
+
+    &:hover {
+      -webkit-filter: none;
+      transition: 0.25s;
+    }
+  }
+  &__img {
+    height: auto;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.tabs {
+  padding-top: 25px;
+
+  &__caption {
+    max-width: 30%;
+    text-align: center;
+    padding-bottom: 50px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-family: "Dosis";
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+      text-shadow: 0 0 10px #ff0000, 0 0 50px #ff0000;
+    }
+  }
+
+  &__title + &__title {
+    margin-left: 5px;
+  }
+}
+
+//  START                                                                  START
+.start {
+  color: #fff;
+  background-color: #000;
+  text-align-last: center;
+
+  &__title {
+    font-weight: lighter;
+  }
+}
+
+//CHOOSE US                                                                CHOOSE US
+
+.choose {
+  &__card {
+    text-align: center;
+    font-family: "Open Sans";
+    font-weight: lighter;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  &__icon {
+    font-size: 48px;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    padding: 15px 0;
+  }
+}
+
+//PEOPLE SAY                                                               PEOPLE SAY
+.review {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+
+  &__icon {
+    font-size: 32px;
+    margin-bottom: 25px;
+  }
+
+  &__title {
+    font-weight: lighter;
+    margin-bottom: 45px;
+  }
+
+  &__txt {
+    font-weight: lighter;
+    font-family: "open sans";
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+
+  &__author {
+    font-family: "open sans";
+    font-weight: lighter;
+    font-size: 11px;
+    opacity: 0.7;
+  }
+}
+
+.slick-dots li {
+  font-size: 0px;
+  color: #fff;
+  background-color: #fff;
+  border: 1px solid #fff;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &.slick-active {
+    background-color: #a55050;
+  }
+}
+
+// NEWS                                                             NEWS
+.news {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__link {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    &:hover {
+      text-shadow: 0 0 10px #ff0000, 0 0 50px #ff0000;
+    }
+  }
+
+  &__item {
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  &__img {
+    -webkit-filter: grayscale(100%);
+
+    &:hover {
+      -webkit-filter: none;
+      transition: 0.25s;
+    }
+  }
+
+  &__item__title {
+    font-family: "Dosis";
+    font-weight: lighter;
+    font-size: 15px;
+    padding: 10px 0 15px 0;
+  }
+
+  &__item__author {
+    font-family: "Dosis";
+    font-size: 11px;
+    font-weight: lighter;
+    position: relative;
+    padding-right: 10px;
+
+    &:hover {
+      text-shadow: 0 0 10px #ff0000, 0 0 50px #ff0000;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 2px;
+      background-color: $mainBackground;
+    }
+  }
+  &__item__date {
+    font-family: "Dosis";
+    font-size: 11px;
+    font-weight: lighter;
+    margin: 0;
+    padding-left: 5px;
+  }
+
+  &__item__text {
+    font-family: "Open Sans";
+    font-size: 15px;
+    text-transform: none;
+    letter-spacing: 1px;
+    font-weight: lighter;
+    padding: 10px 0 15px 0;
+  }
+
+  &__item__link {
+    font-family: "Open Sans";
+    font-size: 11px;
+    padding: 5px 15px;
+    border: 1px solid $mainBackground;
+    background-color: $mainBackground;
+
+    &:hover {
+      background-color: #a55050;
+      color: #fff;
+    }
+  }
+}
+
+//INFORMED                                              INFORMED
+
+.informed {
+  background-color: #c0c0c057;
+  border-top: 1px solid $mainColor;
+  border-bottom: 1px solid $mainColor;
+  text-align: center;
+  padding-top: 80px 0 90px 0;
+
+  &__title {
+    padding-bottom: 20px;
+    font-weight: lighter;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  &__form {
+  }
+  &__email {
+    letter-spacing: 3px;
+    font-size: 15.5px;
+    font-family: "Dosis";
+    font-weight: lighter;
+    text-transform: uppercase;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid $mainColor;
+    padding: 10px;
+  }
+  &__btn {
+    padding: 10px 40px;
+    border: 1px solid $mainColor;
+    background-color: $mainColor;
+    color: #fff;
+  }
+  &__subtitle {
+    padding-top: 20px;
+    font-family: "Open Sans";
+    font-size: 10px;
+    font-weight: lighter;
+    color: $mainColor;
+  }
+  &__subtitle__icon {
+    margin-right: 5px;
+  }
+  &__subtitle__txt {
+  }
+}
+
+// CONTACT                                                  CONTACT
+
+.contacts {
+  &__container {
+    max-width: 800px;
+  }
+  &__icon {
+    font-size: 12px;
+    color: white;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 5px;
+    left: 5px;
+  }
+
+  &__border_icon {
+    background-color: black;
+    border: solid black 1px;
+    width: 24px;
+    height: 24px;
+    transform: rotate(45deg);
+    position: relative;
+    margin-right: 15px;
+  }
+
+  &__card {
+    display: flex;
+    align-items: center;
+  }
+
+  &__data__title {
+    display: block;
+    font-family: "Dosis";
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  &__data__info {
+    &:hover {
+      text-shadow: 0 0 10px #ff0000, 0 0 50px #ff0000;
+    }
+  }
+
+  &__forma {
+    width: 100%;
+  }
+  &__form {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__name-email {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  &__form__input {
+    font-weight: lighter;
+    letter-spacing: 2px;
+    font-family: "Open Sans";
+    font-size: 12px;
+    text-transform: uppercase;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 5px;
+    padding: 6px 0 6px 5px;
+  }
+
+  &__form__input + &__form__input {
+    margin-top: 10px;
+  }
+
+  &__message {
+    width: 60%;
+  }
+  &__form__text {
+    resize: none;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    font-family: "open sans";
+    font-size: 12px;
+    text-transform: uppercase;
+    width: 100%;
+    max-width: 373px;
+    padding: 5px 0 30px 5px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__txt {
+      font-family: "Open Sans";
+      font-size: 10px;
+      font-weight: lighter;
+      color: grey;
+    }
+
+    &__icon {
+    }
+  }
+  &__btn {
+    background-color: #000;
+    color: white;
+    font-size: 13px;
+    padding: 7px 20px;
+  }
+}
+//MAP                                                              MAP
+
+.open-map {
+  background-color: #000;
+  color: #fff;
+  padding: 150px 0 150px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &__frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+
+    &:hover {
+      opacity: 1;
+      -webkit-filter: grayscale(100%);
+      transition: 1s;
+    }
+  }
+}
+
+//FOOTER                                                    FOOTER
+.footer {
+  padding: 50px 0 15px 0;
+  text-align: center;
+  &__social-list {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 25px 0;
+  }
+  &__social-item {
+    border: solid black 1px;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    position: relative;
+    font-size: 12px;
+    transform: rotate(45deg);
+
+    &:hover {
+      background-color: #000;
+      color: #fff;
+    }
+  }
+  &__social-item + &__social-item {
+    margin-left: 15px;
+  }
+
+  &__social-item__link {
+    display: inline-block;
+    text-align: center;
+    margin: 0;
+    transform: rotate(-45deg);
+    margin: auto;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+  }
+
+  &__copyright__title {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: "Dosis";
+    letter-spacing: 2px;
+    padding: 15px 0;
+  }
+  &__copyright__subtitle {
+    font-size: 11px;
+  }
+}
