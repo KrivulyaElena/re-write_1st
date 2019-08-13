@@ -208,7 +208,7 @@ body {
   display: none;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 628px) {
   .menu {
     display: flex;
     flex-direction: column;
@@ -219,13 +219,12 @@ body {
 
     &__link {
       text-align: center;
-      letter-spacing: 300;
       text-transform: uppercase;
       color: #fff;
       transition: color 0.3s;
       display: block;
-      font-size: 16px;
-      padding: 15px 0;
+      font-size: 14px;
+      padding: 0;
     }
   }
 
@@ -236,7 +235,7 @@ body {
     width: 100%;
     top: 100%;
     background-color: grey;
-    padding: 25px 0;
+    padding: 5px 15px;
     display: none;
 
     &.open {
@@ -416,12 +415,12 @@ body {
   transition: transform 0.9s ease-in-out;
 }
 
-.author-profile {  
+.author-profile {
   font-size: 12px;
   line-height: 12px;
   border: 1px solid #eee;
   padding: 50px 10px;
-  color: #fff;  
+  color: #fff;
   position: absolute;
   top: 45%;
   left: 50%;
@@ -437,17 +436,16 @@ body {
   }
   &__msg {
     padding: 15px 0;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-size: 10px;
     text-transform: lowercase;
-   
   }
   &__social {
     display: flex;
     padding: 15px 0;
   }
 
-  &__social-item + &__social-item{
+  &__social-item + &__social-item {
     margin-left: 10px;
   }
   &__social-item__link {
@@ -999,5 +997,276 @@ body {
   }
   &__copyright__subtitle {
     font-size: 11px;
+  }
+}
+
+//992                                                               992
+@media (max-width: 992px) {
+  .ba-section {
+    padding: 25px 5px;
+  }
+
+  .looking-for__iMac {
+    top: -35px;
+    width: 64%;
+  }
+  .tabs__caption {
+    max-width: 50%;
+  }
+
+  .portfolio__text {
+    max-width: 63%;
+  }
+
+  .services__icons {
+    width: 100%;
+  }
+
+  .services__icon {
+    padding: 0 5px;
+  }
+  .services__icon-txt {
+    font-size: 12px;
+  }
+  .services__icon-img {
+    font-size: 40px;
+  }
+}
+
+//628                                                              628
+@media (max-width: 628px) {
+  .hero__title {
+    letter-spacing: 30px;
+  }
+
+  .about__authors__link,
+  .about__authors__position {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .about__authors {
+    padding: 0 5px;
+  }
+
+  .looking-for__iMac {
+    width: 89%;
+  }
+}
+
+//576                                                             576
+@media (max-width: 576px) {
+  .about__txt {
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  .services__icon-img {
+    font-size: 32px;
+    margin-bottom: 23px;
+  }
+
+  .services__icon {
+    padding: 0px 6px;
+    &-txt {
+      font-size: 7px;
+    }
+  }
+
+  .ba-section {
+    padding: 5px 5px 15px 5px;
+  }
+
+  .ba-section__title {
+    font-size: 14px;
+    padding: 10px 0 25px 0;
+  }
+
+  .looking-for__iMac {
+    top: -15px;
+    width: 65%;
+  }
+
+  .looking-for__btn {
+    margin-top: 0px;
+  }
+
+  .portfolio__text {
+    font-size: 11px;
+  }
+
+  .tabs__caption {
+    max-width: 80%;
+  }
+
+  .choose__card {
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  .choose__icon {
+    font-size: 35px;
+  }
+
+  .review__title {
+    margin-bottom: 0;
+  }
+
+  .review__txt {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .news__item {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .news__img {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  .contacts__card {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .contacts__data {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .contacts__data__title {
+    margin-right: 10px;
+  }
+
+  .contacts__form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .contacts__name-email {
+    width: 100%;
+    display: flex;
+  }
+
+  .contacts__message {
+    width: 100%;
+  }
+
+  .contacts__form__text {
+    width: 53%;
+  }
+
+  .looking-for__title {
+    font-size: 15px;
+  }
+
+  .looking-for__txt {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 435px) {
+  .looking-for__iMac {
+    width: 87%;
+  }
+
+  .looking-for__btn {
+    padding: 5px 10px;
+  }
+  .informed__btn {
+    padding: 5px 15px;
+    margin-top: 10px;
+  }
+  .contacts__form__text {
+    width: 71%;
+  }
+}
+
+//320                                                                       320
+@media (max-width: 320px) {
+  .contacts__form__text {
+    width: 97%;
+  }
+
+  .ba-btn {
+    border: 1px solid $mainColor;
+    font-size: 12px;
+    padding: 5px 30px;
+  }
+
+  .informed__email {
+    margin-bottom: 10px;
+  }
+
+  .news__link {
+    font-size: 7px;
+  }
+
+  .choose__card {
+    width: 100%;
+  }
+
+  .choose__txt {
+    margin-bottom: 10px;
+  }
+
+  .tabs__caption {
+    width: 100%;
+    padding-bottom: 10px;
+  }
+  .tabs__title {
+    font-size: 10px;
+  }
+
+  .portfolio__tabs {
+    padding: 5px;
+    width: 100%;
+  }
+
+  .looking-for__title {
+    font-size: 10px;
+  }
+
+  .looking-for__txt {
+    font-size: 10px;
+  }
+
+  .looking-for__info {
+    width: 45%;
+    padding: 0 0 0 15px;
+  }
+
+  .looking-for__image {
+    width: 55%;
+    padding: 0 15px 0 0x;
+  }
+
+  .looking-for__iMac {
+    top: -12px;
+    width: 90%;
+  }
+
+  .services__icon-img {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .services__icon {
+    width: 50%;
+    margin-bottom: 15px;
+  }
+
+  .about__authors {
+    width: 100%;
+  }
+
+  .author-profile {
+    top: 15%;
   }
 }
