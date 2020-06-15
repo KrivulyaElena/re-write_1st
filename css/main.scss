@@ -87,6 +87,7 @@ $col: $columns;
 @include col-create();
 @import "slick.scss";
 @import "slick-theme.scss";
+@import "fontawesome.scss";
 
 //buttons
 a,
@@ -253,14 +254,14 @@ body {
       display: block;
       content: "";
       height: 2px;
-      background-color: white;
+      background-color: #000;
     }
 
     & span {
       display: block;
       content: "";
       height: 2px;
-      background-color: white;
+      background-color: #000;
       margin: 6px 0;
     }
   }
